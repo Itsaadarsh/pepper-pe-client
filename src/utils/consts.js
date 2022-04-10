@@ -1,0 +1,4 @@
+const API = 'http://localhost:3000';
+const TOKEN =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjMwMTVjY2E0NzVlMTExYTI0YjkiLCJpYXQiOjE2NDQ4ODQ3Mzd9.L44j34lRArlxvY9oj0aKxJHcOPTmWBcLb4VO9Cl58R4';
+export { API, TOKEN };
