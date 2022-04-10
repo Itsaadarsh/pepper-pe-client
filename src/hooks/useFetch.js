@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { TOKEN } from '../utils/consts';
 
-const useFetch = (method, url, body) => {
+const useFetch = (method, url, body,token) => {
   const [isLoading, setIsLoading] = useState(true);
   const [apiData, setApiData] = useState(null);
   const [serverError, setServerError] = useState(null);
@@ -13,7 +12,7 @@ const useFetch = (method, url, body) => {
         method: method,
         url: url,
         data: body,
-        headers: { Authorization: `Bearer ${TOKEN}` },
+        headers: { Authorization: `Bearer ${token}` },
       });
       const data = await resp?.data;
       setApiData(data);

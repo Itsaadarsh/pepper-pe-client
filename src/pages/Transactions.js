@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '../components/Card';
 import useFetch from '../hooks/useFetch';
 import { USER_API } from '../utils/consts';
+import { getCookie } from '../utils/cookies';
 var moment = require('moment');
 
 export const Transactions = () => {
-  const { isLoading, apiData, serverError } = useFetch('GET', `${USER_API}/transaction`, {});
+  const [auth, setAuth] = useState(false);
+  let navigate = useNavigate();
+  const isLoggedIn = getCookie('auth');
+  useEffect(() => {
+    if (isLoggedIn == null) {
+      navigate('/login');
+    }
+    setAuth(true);
+  }, [auth]);
+
+  const { isLoading, apiData, serverError } = useFetch('GET', `${USER_API}/transaction`, {}, isLoggedIn);
 
   if (isLoading) {
     return <span>Loading!</span>;

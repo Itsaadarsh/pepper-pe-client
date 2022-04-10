@@ -1,17 +1,29 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { Card } from '../components/Card';
-import useFetch from '../hooks/useFetch';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TOKEN, USER_API } from '../utils/consts';
+import { getCookie } from '../utils/cookies';
 
 export const Transfer = () => {
   const [to, setTo] = useState('');
   const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
+  const [resMessage, setResMessage] = useState('');
+  const [disable, setDisable] = useState(false);
+
+  const [auth, setAuth] = useState(false);
+  const isLoggedIn = getCookie('auth');
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn == null) {
+      navigate('/login');
+    }
+    setAuth(true);
+  }, [auth]);
 
   const pay = async () => {
-    console.log('hah');
-
+    setDisable(true);
     const resp = await axios({
       method: 'POST',
       url: `${USER_API}/transaction`,
@@ -20,10 +32,14 @@ export const Transfer = () => {
         amount: +amount,
         remarks: message,
       },
-      headers: { Authorization: `Bearer ${TOKEN}` },
+      headers: { Authorization: `Bearer ${isLoggedIn}` },
     });
-    console.log('resp');
     const data = await resp?.data;
+
+    console.log(data);
+
+    setResMessage(data);
+    setDisable(false);
   };
 
   return (
@@ -63,9 +79,31 @@ export const Transfer = () => {
           <button
             className='mt-10 w-full bg-sky-500 font-semibold py-2 rounded-md  tracking-wide'
             onClick={pay}
+            disabled={disable}
           >
             PAY
           </button>
+          {resMessage && (
+            <>
+              {resMessage.error ? (
+                <div
+                  className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-5'
+                  role='alert'
+                >
+                  <span class='block sm:inline'>{resMessage.data.message}</span>
+                  <span class='absolute top-0 bottom-0 right-0 px-4 py-3'></span>
+                </div>
+              ) : (
+                <div
+                  className='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-5'
+                  role='alert'
+                >
+                  <span class='block sm:inline'>{resMessage.data.message}</span>
+                  <span class='absolute top-0 bottom-0 right-0 px-4 py-3'></span>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </section>
