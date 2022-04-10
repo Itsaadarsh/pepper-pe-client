@@ -1,4 +1,5 @@
-const API = 'http://localhost:3000';
+const USER_API = 'https://pepper-pe-user.herokuapp.com/api/user';
+const ADMIN_API = 'https://pepper-pe-admin.herokuapp.com/api/admin';
 const TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBhZjMwMTVjY2E0NzVlMTExYTI0YjkiLCJpYXQiOjE2NDQ4ODQ3Mzd9.L44j34lRArlxvY9oj0aKxJHcOPTmWBcLb4VO9Cl58R4';
-export { API, TOKEN };
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X251bWJlciI6ODc0Mjg5NzEwMDIwNDk5NiwiaWF0IjoxNjQ5NTg1MDU2LCJleHAiOjE2NDk2NzE0NTZ9.JA3DcKrvvFXzUVDRA6EoEZtgbVTllVsbAz4v5yhO0gY';
+export { USER_API, ADMIN_API, TOKEN };

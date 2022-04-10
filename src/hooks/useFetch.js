@@ -31,4 +31,4 @@ const useFetch = (method, url, body) => {
   return { isLoading, apiData, serverError };
 };
 
-export default useFetch;
+export default useFetch ;
