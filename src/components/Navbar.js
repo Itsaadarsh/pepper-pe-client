@@ -1,6 +1,4 @@
 import React from 'react';
-import { MdNotifications, MdSearch } from 'react-icons/md';
-import { FaUserCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {

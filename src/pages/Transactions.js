@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card } from '../components/Card';
 import useFetch from '../hooks/useFetch';
 import { USER_API } from '../utils/consts';
 import { getCookie } from '../utils/cookies';
